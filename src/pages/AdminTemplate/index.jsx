@@ -1,3 +1,10 @@
+import { Outlet } from "react-router-dom";
+
 export default function AdminTemPlate() {
-  return <div>AdminTemPlate</div>;
+  return (
+    <div>
+      AdminTemPlate
+      <Outlet />
+    </div>
+  );
 }
