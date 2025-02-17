@@ -9,20 +9,28 @@ import { Link } from "react-router-dom";
 const { Sider } = Layout;
 
 export default function Sidebar() {
+  const menuItems = [
+    {
+      key: "1",
+      icon: <UserOutlined />,
+      label: <Link to="/admin/list-user">Quản lý người dùng</Link>,
+    },
+    {
+      key: "2",
+      icon: <VideoCameraOutlined />,
+      label: <Link to="/admin/list-film">Quản lý phim</Link>,
+    },
+    {
+      key: "3",
+      icon: <ScheduleOutlined />,
+      label: <Link to="/admin/show-time">Quản lý suất chiếu</Link>,
+    },
+  ];
+
   return (
     <Sider theme="dark" collapsible>
-      <div className="logo p-4 text-white text-center font-bold">Admin</div>
-      <Menu theme="dark" mode="inline">
-        <Menu.Item key="1" icon={<UserOutlined />}>
-          <Link to="/admin/list-user">Quản lý người dùng</Link>
-        </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          <Link to="/admin/list-film">Quản lý phim</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<ScheduleOutlined />}>
-          <Link to="/admin/show-time">Quản lý suất chiếu</Link>
-        </Menu.Item>
-      </Menu>
+      <div className="p-4 text-white text-center font-bold text-xl">Admin</div>
+      <Menu theme="dark" mode="inline" items={menuItems} />
     </Sider>
   );
 }
