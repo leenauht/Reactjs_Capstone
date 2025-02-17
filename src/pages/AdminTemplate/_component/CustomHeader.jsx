@@ -15,17 +15,16 @@ export default function CustomHeader() {
   };
 
   return (
-    <Header className="flex justify-between items-center bg-white shadow px-6 py-3">
-      <h1 className="text-xl font-bold text-gray-800">Admin Dashboard</h1>
+    <Header className="flex justify-end items-center bg-white shadow-md px-6 py-3">
       <Button
         type="primary"
         danger
         icon={<LogoutOutlined />}
         onClick={handleLogout}
         size="large"
-        className="hover:bg-red-600 transition-all duration-200"
+        className="hover:bg-red-600 transition-all duration-200 text-white"
       >
-        Logout
+        Đăng xuất
       </Button>
     </Header>
   );

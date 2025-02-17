@@ -49,7 +49,7 @@ export default function AuthPage() {
   }, [submitted, state.error, state.data]);
 
   if (state.data) {
-    return <Navigate to="/admin" />;
+    return <Navigate to="/admin/list-user" />;
   }
 
   return (
