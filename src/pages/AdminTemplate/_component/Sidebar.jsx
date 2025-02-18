@@ -6,11 +6,13 @@ import {
   UnorderedListOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const { Sider } = Layout;
 
 export default function Sidebar() {
+  const location = useLocation();
+
   const menuItems = [
     {
       key: "user",
@@ -18,12 +20,12 @@ export default function Sidebar() {
       label: "Quản lý người dùng",
       children: [
         {
-          key: "1",
+          key: "/admin/list-user",
           icon: <UnorderedListOutlined />,
           label: <Link to="/admin/list-user">Danh sách người dùng</Link>,
         },
         {
-          key: "2",
+          key: "/admin/add-user",
           icon: <PlusOutlined />,
           label: <Link to="/admin/add-user">Thêm người dùng</Link>,
         },
@@ -35,12 +37,12 @@ export default function Sidebar() {
       label: "Quản lý phim",
       children: [
         {
-          key: "3",
+          key: "/admin/list-film",
           icon: <UnorderedListOutlined />,
           label: <Link to="/admin/list-film">Danh sách phim</Link>,
         },
         {
-          key: "4",
+          key: "/admin/add-film",
           icon: <PlusOutlined />,
           label: <Link to="/admin/add-film">Thêm phim</Link>,
         },
@@ -52,12 +54,12 @@ export default function Sidebar() {
       label: "Quản lý suất chiếu",
       children: [
         {
-          key: "5",
+          key: "/admin/list-showtime",
           icon: <UnorderedListOutlined />,
           label: <Link to="/admin/list-showtime">Danh sách suất chiếu</Link>,
         },
         {
-          key: "6",
+          key: "/admin/add-showtime",
           icon: <PlusOutlined />,
           label: <Link to="/admin/add-showtime">Thêm suất chiếu</Link>,
         },
@@ -68,7 +70,12 @@ export default function Sidebar() {
   return (
     <Sider theme="dark" collapsible width={250}>
       <div className="p-4 text-white text-center font-bold text-xl">Admin</div>
-      <Menu theme="dark" mode="inline" items={menuItems} />
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[location.pathname]}
+        items={menuItems}
+      />
     </Sider>
   );
 }

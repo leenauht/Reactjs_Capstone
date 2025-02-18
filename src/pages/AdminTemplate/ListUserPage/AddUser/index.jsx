@@ -1,89 +1,121 @@
+import { useEffect } from "react";
 import { Form, Input, Button, Select, notification, Card } from "antd";
 import {
   UserOutlined,
   LockOutlined,
   MailOutlined,
   PhoneOutlined,
+  EditOutlined,
+  UserSwitchOutlined,
 } from "@ant-design/icons";
-import api from "../../../../services/api";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserInfo, updateUser, createUser, resetUserInfo } from "./slice";
 
 const { Option } = Select;
 
 export default function AddUserPage() {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { userInfo, loading } = useSelector((state) => state.userReducer);
 
-  const handleSubmit = async (values) => {
-    const userWithGroup = {
-      ...values,
-      maNhom: "GP08",
-    };
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchUserInfo(id));
+    }
+    return () => dispatch(resetUserInfo());
+  }, [dispatch, id]);
 
-    try {
-      const result = await api.post(
-        "/QuanLyNguoiDung/ThemNguoiDung",
-        userWithGroup
-      );
-
-      notification.success({
-        message: "Thêm người dùng thành công!",
-        description: result.data.message,
-        placement: "bottomRight",
-      });
-
+  useEffect(() => {
+    if (userInfo) {
+      form.setFieldsValue(userInfo);
+    } else {
       form.resetFields();
-    } catch (error) {
-      notification.error({
-        message: "Thêm người dùng thất bại!",
-        description: error.response?.data?.content || "Có lỗi xảy ra!",
-        placement: "bottomRight",
-      });
+    }
+  }, [userInfo, form]);
+
+  const handleSubmit = (values) => {
+    const userData = { ...values, maNhom: "GP08" };
+
+    console.log("🚀 ~ handleSubmit ~ userData:", userData);
+    if (id) {
+      dispatch(updateUser(userData))
+        .unwrap()
+        .then(() => {
+          notification.success({
+            message: "Cập nhật thành công!",
+            placement: "bottomRight",
+          });
+          navigate("/admin/list-user");
+        })
+        .catch((error) => {
+          notification.error({
+            message: "Cập nhật thất bại!",
+            description: error || "Có lỗi xảy ra!",
+            placement: "bottomRight",
+          });
+        });
+    } else {
+      dispatch(createUser(userData))
+        .unwrap()
+        .then(() => {
+          notification.success({
+            message: "Thêm người dùng thành công!",
+            placement: "bottomRight",
+          });
+          navigate("/admin/list-user");
+        })
+        .catch((error) => {
+          notification.error({
+            message: "Thêm người dùng thất bại!",
+            description: error || "Có lỗi xảy ra!",
+            placement: "bottomRight",
+          });
+        });
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <Card
-        title={
-          <h2 style={{ textAlign: "left", fontSize: "24px" }}>
-            Thêm Người Dùng
-          </h2>
-        }
-        className="w-full max-w-lg"
-      >
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="text-left text-3xl font-semibold py-6 w-full pl-6">
+        {id ? "Cập Nhật Người Dùng" : "Thêm Người Dùng"}
+      </h2>
+      <Card className="w-full max-w-lg shadow-xl rounded-lg bg-white">
         <Form
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
-          initialValues={{
-            maLoaiNguoiDung: "KhachHang",
-          }}
+          initialValues={{ maLoaiNguoiDung: "KhachHang" }}
         >
           <Form.Item
-            label={<span style={{ fontSize: "16px" }}>Tài khoản</span>}
+            label={<span className="text-lg">Tài khoản</span>}
             name="taiKhoan"
             rules={[{ required: true, message: "Vui lòng nhập tài khoản!" }]}
           >
             <Input
               prefix={<UserOutlined />}
               placeholder="Nhập tài khoản"
-              style={{ fontSize: "16px" }}
+              className="text-lg"
+              disabled={!!id}
             />
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontSize: "16px" }}>Mật khẩu</span>}
+            label={<span className="text-lg">Mật khẩu</span>}
             name="matKhau"
             rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
           >
             <Input.Password
               prefix={<LockOutlined />}
               placeholder="Nhập mật khẩu"
-              style={{ fontSize: "16px" }}
+              className="text-lg"
             />
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontSize: "16px" }}>Email</span>}
+            label={<span className="text-lg">Email</span>}
             name="email"
             rules={[
               { required: true, message: "Vui lòng nhập email!" },
@@ -93,13 +125,13 @@ export default function AddUserPage() {
             <Input
               prefix={<MailOutlined />}
               placeholder="Nhập email"
-              style={{ fontSize: "16px" }}
+              className="text-lg"
             />
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontSize: "16px" }}>Số điện thoại</span>}
-            name="soDt"
+            label={<span className="text-lg">Số điện thoại</span>}
+            name="soDT"
             rules={[
               { required: true, message: "Vui lòng nhập số điện thoại!" },
               { pattern: /^[0-9]+$/, message: "Số điện thoại không hợp lệ!" },
@@ -108,23 +140,31 @@ export default function AddUserPage() {
             <Input
               prefix={<PhoneOutlined />}
               placeholder="Nhập số điện thoại"
-              style={{ fontSize: "16px" }}
+              className="text-lg"
             />
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontSize: "16px" }}>Họ tên</span>}
+            label={<span className="text-lg">Họ tên</span>}
             name="hoTen"
             rules={[{ required: true, message: "Vui lòng nhập họ tên!" }]}
           >
-            <Input placeholder="Nhập họ tên" style={{ fontSize: "16px" }} />
+            <Input
+              prefix={<EditOutlined />}
+              placeholder="Nhập họ tên"
+              className="text-lg"
+            />
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ fontSize: "16px" }}>Loại người dùng</span>}
+            label={<span className="text-lg">Loại người dùng</span>}
             name="maLoaiNguoiDung"
           >
-            <Select style={{ fontSize: "16px" }}>
+            <Select
+              prefix={<UserSwitchOutlined />}
+              className="text-lg"
+              size="large"
+            >
               <Option value="KhachHang">Khách Hàng</Option>
               <Option value="QuanTri">Quản Trị</Option>
             </Select>
@@ -135,9 +175,10 @@ export default function AddUserPage() {
               type="primary"
               htmlType="submit"
               block
-              style={{ fontSize: "16px" }}
+              className="text-lg py-5"
+              loading={loading}
             >
-              Thêm Người Dùng
+              {id ? "Cập Nhật Người Dùng" : "Thêm Người Dùng"}
             </Button>
           </Form.Item>
         </Form>

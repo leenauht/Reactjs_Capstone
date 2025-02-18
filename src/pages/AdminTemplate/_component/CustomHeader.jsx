@@ -1,13 +1,11 @@
 import { Layout, Button } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "./../AuthPage/slice";
 
 const { Header } = Layout;
 
 export default function CustomHeader() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
