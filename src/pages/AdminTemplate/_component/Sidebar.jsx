@@ -32,19 +32,19 @@ export default function Sidebar() {
       ],
     },
     {
-      key: "film",
+      key: "movie",
       icon: <VideoCameraOutlined />,
       label: "Quản lý phim",
       children: [
         {
-          key: "/admin/list-film",
+          key: "/admin/list-movie",
           icon: <UnorderedListOutlined />,
-          label: <Link to="/admin/list-film">Danh sách phim</Link>,
+          label: <Link to="/admin/list-movie">Danh sách phim</Link>,
         },
         {
-          key: "/admin/add-film",
+          key: "/admin/add-movie",
           icon: <PlusOutlined />,
-          label: <Link to="/admin/add-film">Thêm phim</Link>,
+          label: <Link to="/admin/add-movie">Thêm phim</Link>,
         },
       ],
     },
@@ -56,25 +56,26 @@ export default function Sidebar() {
         {
           key: "/admin/list-showtime",
           icon: <UnorderedListOutlined />,
-          label: <Link to="/admin/list-showtime">Danh sách suất chiếu</Link>,
+          label: <Link to="/admin/list-showtime">Danh sách</Link>,
         },
         {
           key: "/admin/add-showtime",
           icon: <PlusOutlined />,
-          label: <Link to="/admin/add-showtime">Thêm suất chiếu</Link>,
+          label: <Link to="/admin/add-showtime">Thêm</Link>,
         },
       ],
     },
   ];
 
   return (
-    <Sider theme="dark" collapsible width={250}>
-      <div className="p-4 text-white text-center font-bold text-xl">Admin</div>
+    <Sider theme="dark" collapsible width={250} className="min-h-screen">
+      <div className="p-3 text-white text-center font-bold text-lg">Admin</div>
       <Menu
         theme="dark"
         mode="inline"
         selectedKeys={[location.pathname]}
         items={menuItems}
+        className="text-sm"
       />
     </Sider>
   );

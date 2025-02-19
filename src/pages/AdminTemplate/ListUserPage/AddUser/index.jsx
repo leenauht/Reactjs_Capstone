@@ -78,11 +78,11 @@ export default function AddUserPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h2 className="text-left text-3xl font-semibold py-6 w-full pl-6">
+    <div className="flex flex-col items-center justify-center p-5">
+      <h2 className="text-left text-2xl font-bold  w-full pb-4">
         {id ? "Cập Nhật Người Dùng" : "Thêm Người Dùng"}
       </h2>
-      <Card className="w-full max-w-lg shadow-xl rounded-lg bg-white">
+      <Card className="w-full max-w-lg shadow-xl rounded-lg bg-white ">
         <Form
           form={form}
           layout="vertical"

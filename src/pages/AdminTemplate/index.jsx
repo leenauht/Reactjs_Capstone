@@ -20,12 +20,14 @@ export default function AdminTemplate() {
   }
 
   return (
-    <Layout className="min-h-screen">
+    <Layout className="h-screen">
       <Sidebar />
-      <Layout>
+      <Layout className="flex flex-col min-h-screen">
         <Header />
-        <Content className="m-4 p-4 bg-white">
-          <Outlet />
+        <Content className="m-4 p-4 bg-white flex-grow overflow-hidden">
+          <div className="h-full overflow-auto">
+            <Outlet />
+          </div>
         </Content>
       </Layout>
     </Layout>

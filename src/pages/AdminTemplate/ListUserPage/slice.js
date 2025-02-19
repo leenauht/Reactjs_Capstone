@@ -28,7 +28,10 @@ export const deleteUser = createAsyncThunk(
       await api.delete(`QuanLyNguoiDung/XoaNguoiDung/?TaiKhoan=${id}`);
       return id;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      console.log(error);
+      return rejectWithValue(
+        error.response.data.content || "Lỗi khi xóa người dùng"
+      );
     }
   }
 );

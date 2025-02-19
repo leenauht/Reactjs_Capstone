@@ -2,13 +2,12 @@ import { Route } from "react-router-dom";
 import AdminTemPlate from "../pages/AdminTemplate";
 import UserTemplate from "../pages/UserTemplate";
 import HomePage from "../pages/UserTemplate/HomePage";
-import ListMoviePage from "../pages/UserTemplate/ListMoviePage";
 import AuthPage from "../pages/AdminTemplate/AuthPage";
 import ListUserPage from "../pages/AdminTemplate/ListUserPage";
 import AddUser from "../pages/AdminTemplate/ListUserPage/AddUser";
-import ListFlimPage from "../pages/AdminTemplate/ListFilmPage";
-import AddFlim from "../pages/AdminTemplate/ListFilmPage/AddFlim";
-import ShowTime from "../pages/AdminTemplate/ListFilmPage/ShowTime";
+import ListMoviePage from "../pages/AdminTemplate/ListMoviePage";
+import AddMovie from "../pages/AdminTemplate/ListMoviePage/AddMovie";
+import ShowTime from "../pages/AdminTemplate/ListMoviePage/ShowTime";
 import PageNotFound from "../pages/PageNotFound";
 
 const routes = [
@@ -43,16 +42,20 @@ const routes = [
         element: AddUser,
       },
       {
-        path: "list-film",
-        element: ListFlimPage,
+        path: "list-movie",
+        element: ListMoviePage,
       },
       {
-        path: "add-film",
-        element: AddFlim,
+        path: "add-movie",
+        element: AddMovie,
       },
       {
-        path: "edit-film/:id",
-        element: AddFlim,
+        path: "edit-movie/:id",
+        element: AddMovie,
+      },
+      {
+        path: "show-time",
+        element: ShowTime,
       },
       {
         path: "show-time/:id",
