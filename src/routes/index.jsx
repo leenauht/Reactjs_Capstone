@@ -4,6 +4,10 @@ import UserTemplate from "../pages/UserTemplate";
 import HomePage from "../pages/UserTemplate/HomePage";
 import DashBoardPage from "../pages/AdminTemplate/DashBoardPage";
 import ListMoviePage from "../pages/UserTemplate/ListMoviePage";
+import BookingTickets from "../pages/UserTemplate/BookingTickets";
+import SignIn from "../pages/UserTemplate/SignIn";
+import SignUp from "../pages/UserTemplate/SignUp";
+import DetailMovie from "../pages/UserTemplate/HomePage/DetailMovie";
 
 const routes = [
   {
@@ -18,6 +22,14 @@ const routes = [
         path: "list-movie",
         element: ListMoviePage,
       },
+      {
+        path: "booking-tickets",
+        element: BookingTickets,
+      },
+      {
+        path: "detail/:id",
+        element: DetailMovie,
+      },
     ],
   },
   {
@@ -29,6 +41,18 @@ const routes = [
         element: DashBoardPage,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: DashBoardPage,
+  },
+  {
+    path: "sign-in",
+    element: SignIn,
+  },
+  {
+    path: "sign-up",
+    element: SignUp,
   },
 ];
 
