@@ -10,6 +10,10 @@ import ListFlimPage from "../pages/AdminTemplate/ListFilmPage";
 import AddFlim from "../pages/AdminTemplate/ListFilmPage/AddFlim";
 import ShowTime from "../pages/AdminTemplate/ListFilmPage/ShowTime";
 import PageNotFound from "../pages/PageNotFound";
+import BookingTickets from "../pages/UserTemplate/BookingTickets";
+import SignIn from "../pages/UserTemplate/SignIn";
+import SignUp from "../pages/UserTemplate/SignUp";
+import DetailMovie from "../pages/UserTemplate/HomePage/DetailMovie";
 
 const routes = [
   {
@@ -23,6 +27,14 @@ const routes = [
       {
         path: "list-movie",
         element: ListMoviePage,
+      },
+      {
+        path: "booking-tickets",
+        element: BookingTickets,
+      },
+      {
+        path: "detail/:id",
+        element: DetailMovie,
       },
     ],
   },
@@ -67,6 +79,14 @@ const routes = [
   {
     path: "*",
     element: PageNotFound,
+  },
+  {
+    path: "sign-in",
+    element: SignIn,
+  },
+  {
+    path: "sign-up",
+    element: SignUp,
   },
 ];
 
