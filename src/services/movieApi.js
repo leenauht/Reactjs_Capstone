@@ -5,11 +5,15 @@ export const movieApi = {
 
   getMovieInfo: (id) => api.get(`/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`),
 
-  //   createMovie: (movieData) =>
-  //     api.post("/QuanLyPhim/ThemPhimUploadHinh", movieData),
+  createMovie: (formData) =>
+    api.post("/QuanLyPhim/ThemPhimUploadHinh", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
 
-  //   updateMovie: (movieData) =>
-  //     api.post("/QuanLyPhim/CapNhatPhimUpload", movieData),
+  updateMovie: (formData) =>
+    api.post("/QuanLyPhim/CapNhatPhimUpload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
 
   deleteMovie: (id) => api.delete(`/QuanLyPhim/XoaPhim?MaPhim=${id}`),
 };

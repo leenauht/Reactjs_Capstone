@@ -38,8 +38,6 @@ export default function AddUserPage() {
 
   const handleSubmit = (values) => {
     const userData = { ...values, maNhom: "GP08" };
-
-    console.log("🚀 ~ handleSubmit ~ userData:", userData);
     if (id) {
       dispatch(updateUser(userData))
         .unwrap()
@@ -78,111 +76,118 @@ export default function AddUserPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-5">
-      <h2 className="text-left text-2xl font-bold  w-full pb-4">
+    <div className="flex flex-col items-center justify-center p-5 bg-gray-100">
+      <h2 className="text-left text-2xl font-bold w-full pb-4">
         {id ? "Cập Nhật Người Dùng" : "Thêm Người Dùng"}
       </h2>
-      <Card className="w-full max-w-lg shadow-xl rounded-lg bg-white ">
+
+      <div className="w-full container mx-auto bg-white p-8 rounded-lg shadow-lg">
         <Form
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
           initialValues={{ maLoaiNguoiDung: "KhachHang" }}
         >
-          <Form.Item
-            label={<span className="text-lg">Tài khoản</span>}
-            name="taiKhoan"
-            rules={[{ required: true, message: "Vui lòng nhập tài khoản!" }]}
-          >
-            <Input
-              prefix={<UserOutlined />}
-              placeholder="Nhập tài khoản"
-              className="text-lg"
-              disabled={!!id}
-            />
-          </Form.Item>
-
-          <Form.Item
-            label={<span className="text-lg">Mật khẩu</span>}
-            name="matKhau"
-            rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Nhập mật khẩu"
-              className="text-lg"
-            />
-          </Form.Item>
-
-          <Form.Item
-            label={<span className="text-lg">Email</span>}
-            name="email"
-            rules={[
-              { required: true, message: "Vui lòng nhập email!" },
-              { type: "email", message: "Email không hợp lệ!" },
-            ]}
-          >
-            <Input
-              prefix={<MailOutlined />}
-              placeholder="Nhập email"
-              className="text-lg"
-            />
-          </Form.Item>
-
-          <Form.Item
-            label={<span className="text-lg">Số điện thoại</span>}
-            name="soDT"
-            rules={[
-              { required: true, message: "Vui lòng nhập số điện thoại!" },
-              { pattern: /^[0-9]+$/, message: "Số điện thoại không hợp lệ!" },
-            ]}
-          >
-            <Input
-              prefix={<PhoneOutlined />}
-              placeholder="Nhập số điện thoại"
-              className="text-lg"
-            />
-          </Form.Item>
-
-          <Form.Item
-            label={<span className="text-lg">Họ tên</span>}
-            name="hoTen"
-            rules={[{ required: true, message: "Vui lòng nhập họ tên!" }]}
-          >
-            <Input
-              prefix={<EditOutlined />}
-              placeholder="Nhập họ tên"
-              className="text-lg"
-            />
-          </Form.Item>
-
-          <Form.Item
-            label={<span className="text-lg">Loại người dùng</span>}
-            name="maLoaiNguoiDung"
-          >
-            <Select
-              prefix={<UserSwitchOutlined />}
-              className="text-lg"
-              size="large"
+          <div className="grid grid-cols-2 gap-6">
+            <Form.Item
+              label={<span className="text-lg font-medium">Tài khoản</span>}
+              name="taiKhoan"
+              rules={[{ required: true, message: "Vui lòng nhập tài khoản!" }]}
+              className="w-full"
             >
-              <Option value="KhachHang">Khách Hàng</Option>
-              <Option value="QuanTri">Quản Trị</Option>
-            </Select>
-          </Form.Item>
+              <Input
+                prefix={<UserOutlined />}
+                placeholder="Nhập tài khoản"
+                className="text-lg w-full"
+                disabled={!!id}
+              />
+            </Form.Item>
 
-          <Form.Item>
+            <Form.Item
+              label={<span className="text-lg font-medium">Mật khẩu</span>}
+              name="matKhau"
+              rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
+              className="w-full"
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Nhập mật khẩu"
+                className="text-lg w-full"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={<span className="text-lg font-medium">Email</span>}
+              name="email"
+              rules={[
+                { required: true, message: "Vui lòng nhập email!" },
+                { type: "email", message: "Email không hợp lệ!" },
+              ]}
+              className="w-full"
+            >
+              <Input
+                prefix={<MailOutlined />}
+                placeholder="Nhập email"
+                className="text-lg w-full"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={<span className="text-lg font-medium">Số điện thoại</span>}
+              name="soDT"
+              rules={[
+                { required: true, message: "Vui lòng nhập số điện thoại!" },
+                { pattern: /^[0-9]+$/, message: "Số điện thoại không hợp lệ!" },
+              ]}
+              className="w-full"
+            >
+              <Input
+                prefix={<PhoneOutlined />}
+                placeholder="Nhập số điện thoại"
+                className="text-lg w-full"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={<span className="text-lg font-medium">Họ tên</span>}
+              name="hoTen"
+              rules={[{ required: true, message: "Vui lòng nhập họ tên!" }]}
+              className="w-full"
+            >
+              <Input
+                prefix={<EditOutlined />}
+                placeholder="Nhập họ tên"
+                className="text-lg w-full"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={
+                <span className="text-lg font-medium">Loại người dùng</span>
+              }
+              name="maLoaiNguoiDung"
+              className="w-full"
+            >
+              <Select className="text-xl w-full" size="large">
+                <Option value="KhachHang">Khách Hàng</Option>
+                <Option value="QuanTri">Quản Trị</Option>
+              </Select>
+            </Form.Item>
+          </div>
+
+          <Form.Item className="mt-6">
             <Button
               type="primary"
               htmlType="submit"
               block
-              className="text-lg py-5"
+              className="text-lg py-6 font-bold"
               loading={loading}
             >
               {id ? "Cập Nhật Người Dùng" : "Thêm Người Dùng"}
             </Button>
           </Form.Item>
         </Form>
-      </Card>
+      </div>
     </div>
   );
 }

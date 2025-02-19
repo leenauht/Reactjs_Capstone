@@ -48,23 +48,23 @@ export default function Sidebar() {
         },
       ],
     },
-    {
-      key: "showtime",
-      icon: <ScheduleOutlined />,
-      label: "Quản lý suất chiếu",
-      children: [
-        {
-          key: "/admin/list-showtime",
-          icon: <UnorderedListOutlined />,
-          label: <Link to="/admin/list-showtime">Danh sách</Link>,
-        },
-        {
-          key: "/admin/add-showtime",
-          icon: <PlusOutlined />,
-          label: <Link to="/admin/add-showtime">Thêm</Link>,
-        },
-      ],
-    },
+    // {
+    //   key: "showtime",
+    //   icon: <ScheduleOutlined />,
+    //   label: "Quản lý suất chiếu",
+    //   children: [
+    //     {
+    //       key: "/admin/list-showtime",
+    //       icon: <UnorderedListOutlined />,
+    //       label: <Link to="/admin/list-showtime">Danh sách</Link>,
+    //     },
+    //     {
+    //       key: "/admin/add-showtime",
+    //       icon: <PlusOutlined />,
+    //       label: <Link to="/admin/add-showtime">Thêm</Link>,
+    //     },
+    //   ],
+    // },
   ];
 
   return (

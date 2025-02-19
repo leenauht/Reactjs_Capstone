@@ -6,10 +6,7 @@ export const fetchUserInfo = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.post(
-        `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${id}`,
-        {
-          taiKhoan: id,
-        }
+        `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${id}`
       );
       return response.data.content;
     } catch (error) {

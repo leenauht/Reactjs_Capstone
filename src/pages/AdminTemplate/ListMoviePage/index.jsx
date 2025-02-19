@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Table, Button, Popconfirm, Input, message, Layout } from "antd";
+import { Table, Button, Popconfirm, Input, message } from "antd";
 import {
   DeleteOutlined,
   CalendarOutlined,
@@ -17,7 +17,7 @@ export default function ListMoviePage() {
 
   const [searchText, setSearchText] = useState("");
 
-  const { movies, loading } = useSelector((state) => state.movieReducer);
+  const { movies, loading } = useSelector((state) => state.listmovieReducer);
 
   useEffect(() => {
     dispatch(fetchMovieList());
