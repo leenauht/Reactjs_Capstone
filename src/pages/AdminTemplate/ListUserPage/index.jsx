@@ -13,7 +13,9 @@ import { actGetListUser, deleteUser } from "./slice";
 export default function ListUserPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const { data, loading } = useSelector((state) => state.listUserReducer);
+
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
@@ -93,38 +95,42 @@ export default function ListUserPage() {
   ];
 
   return (
-    <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">Danh Sách Người Dùng</h2>
+    <div className="h-full flex flex-col p-5">
+      <h2 className="text-left text-2xl font-bold pb-4">
+        Danh Sách Người Dùng
+      </h2>
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <Input
           prefix={<SearchOutlined />}
           placeholder="Tìm kiếm người dùng..."
-          size="large"
-          className="w-1/2 py-3 px-5 text-lg"
+          size="middle"
+          className="w-1/2 py-2 px-4 text-base"
           onChange={(e) => setSearchText(e.target.value)}
         />
 
         <Button
           type="primary"
           icon={<PlusCircleOutlined />}
-          size="large"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-6 rounded-lg"
+          size="middle"
+          className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold p-5 rounded-md"
           onClick={() => navigate("/admin/add-user")}
         >
           Thêm Người Dùng
         </Button>
       </div>
 
-      <Table
-        dataSource={filteredData}
-        columns={columns}
-        rowKey="taiKhoan"
-        loading={loading}
-        bordered
-        size="large"
-        scroll={{ x: "max-content" }}
-      />
+      <div className="flex-grow overflow-auto">
+        <Table
+          dataSource={filteredData}
+          columns={columns}
+          rowKey="taiKhoan"
+          loading={loading}
+          bordered
+          size="middle"
+          className="w-full"
+        />
+      </div>
     </div>
   );
 }
