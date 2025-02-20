@@ -15,7 +15,7 @@ export default function SignUp() {
     matKhau: "",
     email: "",
     soDt: "",
-    maNhom: "GP08",
+    maNhom: "GP01",
     hoTen: "",
   });
 

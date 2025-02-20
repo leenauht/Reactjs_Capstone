@@ -4,6 +4,7 @@ import listUserReducer from "../pages/AdminTemplate/ListUserPage/slice";
 import userReducer from "../pages/AdminTemplate/ListUserPage/AddUser/slice";
 import listmovieReducer from "../pages/AdminTemplate/ListMoviePage/slice";
 import listMovieReducer from "../pages/UserTemplate/HomePage/ShowingMovie/slice";
+import detaiMovieReducer from "../pages/UserTemplate/HomePage/DetailMovie/sliceInfoFilm";
 import movieReducer from "../pages/AdminTemplate/ListMoviePage/AddMovie/slice";
 import showTimeReducer from "../pages/AdminTemplate/ListMoviePage/ShowTime/slice";
 // import detaiMovieReducer from "../pages/UserTemplate/HomePage/DetailMovie/sliceInfoFilm";
@@ -16,7 +17,7 @@ export const store = configureStore({
   reducer: {
     // Add your child reducers here
     listMovieReducer,
-    // detaiMovieReducer,
+    detaiMovieReducer,
     detailInfoShowTimeReducer,
     signInReducer,
     signUpReducer,
