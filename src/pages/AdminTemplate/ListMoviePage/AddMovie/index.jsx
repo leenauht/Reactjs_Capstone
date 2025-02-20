@@ -41,7 +41,7 @@ export default function AddMoviePage() {
     if (movieInfo) {
       form.setFieldsValue({
         ...movieInfo,
-        ngayKhoiChieu: dayjs(movieInfo.ngayKhoiChieu, "DD/MM/YYYY"),
+        ngayKhoiChieu: dayjs(movieInfo.ngayKhoiChieu, "YYYY-MM-DDTHH"),
       });
       setImgPreview(movieInfo.hinhAnh);
     } else {
@@ -53,63 +53,39 @@ export default function AddMoviePage() {
 
   const handleSubmit = (values) => {
     const formData = new FormData();
+    Object.entries({
+      tenPhim: values.tenPhim,
+      trailer: values.trailer,
+      moTa: values.moTa,
+      ngayKhoiChieu: dayjs(values.ngayKhoiChieu).format("DD/MM/YYYY"),
+      sapChieu: values.sapChieu,
+      dangChieu: values.dangChieu,
+      hot: values.hot,
+      danhGia: values.danhGia,
+    }).forEach(([key, value]) => formData.append(key, value));
 
-    formData.append("tenPhim", values.tenPhim);
-    formData.append("trailer", values.trailer);
-    formData.append("moTa", values.moTa);
-    formData.append(
-      "ngayKhoiChieu",
-      dayjs(values.ngayKhoiChieu).format("DD/MM/YYYY")
-    );
-    formData.append("sapChieu", values.sapChieu ? "true" : "false");
-    formData.append("dangChieu", values.dangChieu ? "true" : "false");
-    formData.append("hot", values.hot ? "true" : "false");
-    formData.append("danhGia", values.danhGia);
+    const image =
+      values.hinhAnh?.fileList?.[0]?.originFileObj || values.hinhAnh;
+    if (image) formData.append("hinhAnh", image);
 
-    if (values.hinhAnh?.fileList?.length > 0) {
-      formData.append("hinhAnh", values.hinhAnh.fileList[0].originFileObj);
-    } else if (values.hinhAnh) {
-      formData.append("hinhAnh", values.hinhAnh);
-    }
+    if (id) formData.append("maPhim", id);
 
-    console.log([...formData.entries()]);
-
-    if (id) {
-      formData.append("maPhim", id);
-      dispatch(updateMovie(formData))
-        .unwrap()
-        .then(() => {
-          notification.success({
-            message: "Cập nhật phim thành công!",
-            placement: "bottomRight",
-          });
-          navigate("/admin/list-movie");
-        })
-        .catch((error) => {
-          notification.error({
-            message: "Cập nhật thất bại!",
-            description: error || "Có lỗi xảy ra!",
-            placement: "bottomRight",
-          });
+    dispatch(id ? updateMovie(formData) : createMovie(formData))
+      .unwrap()
+      .then(() => {
+        notification.success({
+          message: `${id ? "Cập nhật" : "Thêm"} phim thành công!`,
+          placement: "bottomRight",
         });
-    } else {
-      dispatch(createMovie(formData))
-        .unwrap()
-        .then(() => {
-          notification.success({
-            message: "Thêm phim thành công!",
-            placement: "bottomRight",
-          });
-          navigate("/admin/list-movie");
-        })
-        .catch((error) => {
-          notification.error({
-            message: "Thêm phim thất bại!",
-            description: error || "Có lỗi xảy ra!",
-            placement: "bottomRight",
-          });
+        navigate("/admin/list-movie");
+      })
+      .catch((error) => {
+        notification.error({
+          message: `${id ? "Cập nhật" : "Thêm"} thất bại!`,
+          description: error || "Có lỗi xảy ra!",
+          placement: "bottomRight",
         });
-    }
+      });
   };
 
   const handleImageChange = ({ fileList }) => {
