@@ -5,6 +5,7 @@ import userReducer from "../pages/AdminTemplate/ListUserPage/AddUser/slice";
 import listmovieReducer from "../pages/AdminTemplate/ListMoviePage/slice";
 import listMovieReducer from "../pages/UserTemplate/HomePage/ShowingMovie/slice";
 import movieReducer from "../pages/AdminTemplate/ListMoviePage/AddMovie/slice";
+import showTimeReducer from "../pages/AdminTemplate/ListMoviePage/ShowTime/slice";
 // import detaiMovieReducer from "../pages/UserTemplate/HomePage/DetailMovie/sliceInfoFilm";
 import detailInfoShowTimeReducer from "../pages/UserTemplate/HomePage/DetailMovie/sliceInfoShowTime";
 import signInReducer from "../pages/UserTemplate/SignIn/slice";
@@ -27,5 +28,6 @@ export const store = configureStore({
     userReducer,
     listmovieReducer,
     movieReducer,
+    showTimeReducer,
   },
 });

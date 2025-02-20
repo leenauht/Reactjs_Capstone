@@ -6,7 +6,6 @@ export const fetchMovieInfo = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await movieApi.getMovieInfo(id);
-      console.log(response.data.content);
       return response.data.content;
     } catch (error) {
       return rejectWithValue(
