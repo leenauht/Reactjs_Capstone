@@ -34,7 +34,7 @@ export default function Header() {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <span className="self-center text-2xl text-red-600 font-bold whitespace-nowrap">
-            Cyber Film
+            Cyber Movie
           </span>
         </NavLink>
         <button
