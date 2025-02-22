@@ -1,13 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../../services/api";
+import { userApi } from "../../../services/userApi";
 
 export const actGetListUser = createAsyncThunk(
   "listUser/actGetListUser",
   async (_, { rejectWithValue }) => {
     try {
-      const result = await api.get(
-        "QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP08"
-      );
+      const result = await userApi.getUserList();
       return result.data.content.map((user) => {
         return {
           ...user,
@@ -25,10 +23,13 @@ export const deleteUser = createAsyncThunk(
   "users/deleteUser",
   async (id, { rejectWithValue }) => {
     try {
-      await api.delete(`QuanLyNguoiDung/XoaNguoiDung/?TaiKhoan=${id}`);
+      await userApi.deleteUser(id);
       return id;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      console.log(error);
+      return rejectWithValue(
+        error.response.data.content || "Lỗi khi xóa người dùng"
+      );
     }
   }
 );

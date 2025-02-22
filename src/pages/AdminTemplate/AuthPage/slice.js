@@ -17,7 +17,7 @@ export const actLogin = createAsyncThunk(
         });
       }
 
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      localStorage.setItem("userInfoAdmin", JSON.stringify(userInfo));
 
       return result.data.content;
     } catch (error) {
@@ -26,8 +26,8 @@ export const actLogin = createAsyncThunk(
   }
 );
 
-const userInfo = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
+const userInfo = localStorage.getItem("userInfoAdmin")
+  ? JSON.parse(localStorage.getItem("userInfoAdmin"))
   : null;
 
 const initialState = {
@@ -41,7 +41,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      localStorage.removeItem("userInfo");
+      localStorage.removeItem("userInfoAdmin");
       state.data = null;
     },
   },

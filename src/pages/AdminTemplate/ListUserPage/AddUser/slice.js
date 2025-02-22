@@ -1,16 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../../../services/api";
+import { userApi } from "../../../../services/userApi";
 
 export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await api.post(
-        `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${id}`,
-        {
-          taiKhoan: id,
-        }
-      );
+      const response = await userApi.getUserInfo(id);
       return response.data.content;
     } catch (error) {
       return rejectWithValue(
@@ -24,7 +19,7 @@ export const updateUser = createAsyncThunk(
   "user/updateUser",
   async (userData, { rejectWithValue }) => {
     try {
-      await api.post("/QuanLyNguoiDung/CapNhatThongTinNguoiDung", userData);
+      await userApi.updateUser(userData);
       return "Cập nhật thành công";
     } catch (error) {
       return rejectWithValue(
@@ -38,7 +33,7 @@ export const createUser = createAsyncThunk(
   "user/createUser",
   async (userData, { rejectWithValue }) => {
     try {
-      await api.post("/QuanLyNguoiDung/ThemNguoiDung", userData);
+      await userApi.createUser(userData);
       return "Thêm người dùng thành công";
     } catch (error) {
       return rejectWithValue(
