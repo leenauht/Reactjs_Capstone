@@ -18,7 +18,6 @@ export default function DetailMovie() {
   );
   const { data } = state;
   const { id } = useParams();
-  console.log(stateShowtimeInfo);
 
   useEffect(() => {
     dispath(fetchDetailMovie(id));

@@ -11,6 +11,8 @@ import showTimeReducer from "../pages/AdminTemplate/ListMoviePage/ShowTime/slice
 import detailInfoShowTimeReducer from "../pages/UserTemplate/HomePage/DetailMovie/sliceInfoShowTime";
 import signInReducer from "../pages/UserTemplate/SignIn/slice";
 import signUpReducer from "../pages/UserTemplate/SignUp/slice";
+import bookingTicketsReducer from "../pages/UserTemplate/BookingTickets/slice";
+
 import movieShowtimeInfo from "../pages/UserTemplate/BookingTickets/slice";
 
 export const store = configureStore({
@@ -22,6 +24,7 @@ export const store = configureStore({
     signInReducer,
     signUpReducer,
     movieShowtimeInfo,
+    bookingTicketsReducer,
 
     // viet
     authReducer,

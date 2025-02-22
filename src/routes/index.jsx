@@ -28,7 +28,7 @@ const routes = [
         element: ListMoviePage,
       },
       {
-        path: "booking-tickets",
+        path: "booking-tickets/:id",
         element: BookingTickets,
       },
       {
