@@ -6,10 +6,7 @@ import { NavLink } from "react-router-dom";
 export default function Header() {
   const state = useSelector((state) => state.signInReducer);
 
-  const navList = [
-    { to: "/", name: "Home" },
-    { to: "booking-tickets", name: "Booking Tickets" },
-  ];
+  const navList = [{ to: "/", name: "Home" }];
 
   const renderNavList = () => {
     return navList.map((item) => {

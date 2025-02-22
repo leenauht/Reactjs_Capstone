@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../services/api";
 
-export const fetchMovieShowTimeInfo = createAsyncThunk(
-  "bookingTickets/fetchMovieShowTimeInfo",
+export const fetchBoxOfficeList = createAsyncThunk(
+  "bookingTickets/fetchBoxOfficeList",
   async (id, { rejectWithValue }) => {
     try {
       const result = await api.get(
@@ -21,22 +21,22 @@ const initialState = {
   error: null,
 };
 
-const detailInfoShowTimeSlice = createSlice({
+const bookingTicketsSlice = createSlice({
   name: "detailInfoShowTimeSlice",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMovieShowTimeInfo.pending, (state) => {
+      .addCase(fetchBoxOfficeList.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchMovieShowTimeInfo.fulfilled, (state, action) => {
+      .addCase(fetchBoxOfficeList.fulfilled, (state, action) => {
         (state.loading = false), (state.data = action.payload);
       })
-      .addCase(fetchMovieShowTimeInfo.rejected, (state, action) => {
+      .addCase(fetchBoxOfficeList.rejected, (state, action) => {
         (state.loading = false), (state.error = action.payload);
       });
   },
 });
 
-export default detailInfoShowTimeSlice.reducer;
+export default bookingTicketsSlice.reducer;

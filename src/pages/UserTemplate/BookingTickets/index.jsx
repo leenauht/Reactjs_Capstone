@@ -1,22 +1,64 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 import { useEffect } from "react";
-import { fetchMovieShowTimeInfo } from "./slice";
+import { fetchBoxOfficeList } from "./slice";
+import { useParams } from "react-router-dom";
+import Seat from "./Seat";
 
 export default function BookingTickets() {
-  const state = useSelector((state) => state.movieShowtimeInfo);
-  const stateInfoShowtime = useSelector(
-    (state) => state.detailInfoShowTimeReducer
-  );
+  const state = useSelector((state) => state.bookingTicketsReducer);
   const dispath = useDispatch();
 
   const { data } = state;
+  const { id } = useParams();
+
   console.log(data);
 
-  const renderRowIndex = () => {};
+  const row = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+  const col = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K"];
+
+  const renderRowIndex = () => {
+    return row.map((row, index) => {
+      return (
+        <span key={index} className="py-2 px-4">
+          {row}
+        </span>
+      );
+    });
+  };
+
+  const renderCol = () => {
+    return col.map((col, index) => {
+      return (
+        <span key={index} className="py-2 px-3">
+          {col}
+        </span>
+      );
+    });
+  };
+
+  const renderStatus = () => {
+    return (
+      <div className="flex justify-center items-center gap-5 py-2 text-white text-sm">
+        <div className="flex gap-1 items-center">
+          <p className="w-5 h-5 bg-green-500 rounded"></p>
+          <span>Ghế bạn chọn</span>
+        </div>
+        <div className="flex gap-1 items-center">
+          <p className="w-5 h-5 bg-red-500 rounded"></p>
+          <span>Không thể chọn</span>
+        </div>
+        <div className="flex gap-1 items-center">
+          <p className="w-5 h-5 bg-blue-500 rounded"></p>
+          <span>Đã bán</span>
+        </div>
+      </div>
+    );
+  };
 
   useEffect(() => {
-    dispath(fetchMovieShowTimeInfo(16100));
+    dispath(fetchBoxOfficeList(id));
   }, []);
 
   return (
@@ -26,36 +68,24 @@ export default function BookingTickets() {
       </h1>
       <div className="w-[96%] mx-auto md:w-[90%] bg-bg-opacity-4 my-10">
         <div className="p-1 pt-4 md:flex md:p-5 gap-5">
-          <div className="w-full md:w-[70%]">
-            <p className="text-white font-medium">Màn hình</p>
-            <div className="h-5 w-full bg-orange-300 clip-path-custom"></div>
-
-            <div className=" text-white space-y-5 mt-4">{renderRowIndex()}</div>
+          <div className="w-full md:w-[70%] text-left">
+            {renderStatus()}
+            <div className="py-1 w-full bg-slate-300 clip-path-custom text-center uppercase font-bold">
+              Màn hình
+            </div>
+            <div className="text-white mt-4 flex justify-between">
+              {renderRowIndex()}
+            </div>
+            <div className="text-white flex justify-between">
+              <div className="flex flex-col">{renderCol()}</div>
+              <Seat data={data} />
+            </div>
           </div>
           <div className="w-full mt-5 md:mt-0 md:w-[30%]">
             <h2 className="text-white text-2xl font-bold pb-10">
               Danh sách ghế bạn chọn
             </h2>
-            <div className="space-y-5">
-              <div className="flex gap-5 items-center text-white font-medium text-lg pl-10">
-                <div
-                  className="h-8 w-8"
-                  style={{ backgroundColor: "red" }}
-                ></div>
-                Ghế đã đặt
-              </div>
-              <div className="flex gap-5 items-center text-white font-medium text-lg pl-10">
-                <div
-                  className="h-8 w-8"
-                  style={{ backgroundColor: "blue" }}
-                ></div>
-                Ghế đang đặt
-              </div>
-              <div className="flex gap-5 items-center text-white font-medium text-lg pl-10">
-                <div className="h-8 w-8 border"></div>
-                Ghế chưa đặt
-              </div>
-            </div>
+            <div className="space-y-5"></div>
 
             <h2 className="text-white my-5 text-xl font-semibold">
               Ghế đang chọn
