@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { fetchBoxOfficeList } from "./slice";
 import { useParams } from "react-router-dom";
 import Seat from "./Seat";
+import Square from "../../../components/Square";
 
 export default function BookingTickets() {
   const state = useSelector((state) => state.bookingTicketsReducer);
@@ -14,14 +15,32 @@ export default function BookingTickets() {
 
   console.log(data);
 
-  const row = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  const row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-  const col = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K"];
+  const col = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I", "K"];
+
+  const listStatus = [
+    {
+      title: "Ghế bạn chọn",
+      color: "bg-green-500",
+      className: "flex gap-2",
+    },
+    {
+      title: "Không thể chọn",
+      color: "bg-red-500",
+      className: "flex gap-2",
+    },
+    {
+      title: "Đã bán",
+      color: "bg-blue-500",
+      className: "flex gap-2",
+    },
+  ];
 
   const renderRowIndex = () => {
     return row.map((row, index) => {
       return (
-        <span key={index} className="py-2 px-4">
+        <span key={index} className="py-2 px-4 text-red-500">
           {row}
         </span>
       );
@@ -31,7 +50,10 @@ export default function BookingTickets() {
   const renderCol = () => {
     return col.map((col, index) => {
       return (
-        <span key={index} className="py-2 px-3">
+        <span
+          key={index}
+          className={`${col === "" ? "min-h-[40px]" : ""} ${"py-2 px-3"}`}
+        >
           {col}
         </span>
       );
@@ -41,18 +63,14 @@ export default function BookingTickets() {
   const renderStatus = () => {
     return (
       <div className="flex justify-center items-center gap-5 py-2 text-white text-sm">
-        <div className="flex gap-1 items-center">
-          <p className="w-5 h-5 bg-green-500 rounded"></p>
-          <span>Ghế bạn chọn</span>
-        </div>
-        <div className="flex gap-1 items-center">
-          <p className="w-5 h-5 bg-red-500 rounded"></p>
-          <span>Không thể chọn</span>
-        </div>
-        <div className="flex gap-1 items-center">
-          <p className="w-5 h-5 bg-blue-500 rounded"></p>
-          <span>Đã bán</span>
-        </div>
+        {listStatus.map((item) => (
+          <Square
+            key={item.title}
+            title={item.title}
+            color={item.color}
+            className={item.className}
+          ></Square>
+        ))}
       </div>
     );
   };
@@ -73,12 +91,16 @@ export default function BookingTickets() {
             <div className="py-1 w-full bg-slate-300 clip-path-custom text-center uppercase font-bold">
               Màn hình
             </div>
-            <div className="text-white mt-4 flex justify-between">
-              {renderRowIndex()}
-            </div>
-            <div className="text-white flex justify-between">
-              <div className="flex flex-col">{renderCol()}</div>
-              <Seat data={data} />
+            <div className="text-white flex">
+              <div className="flex flex-col justify-between items-center">
+                {renderCol()}
+              </div>
+              <div>
+                <div className="grid grid-cols-[repeat(16,minmax(0,1fr))] place-items-center gap-1">
+                  {renderRowIndex()}
+                </div>
+                <Seat data={data} />
+              </div>
             </div>
           </div>
           <div className="w-full mt-5 md:mt-0 md:w-[30%]">

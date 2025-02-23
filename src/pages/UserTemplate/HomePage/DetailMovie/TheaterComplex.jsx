@@ -14,7 +14,7 @@ export default function TheaterComplex({ theater }) {
       {toggleMovie && (
         <div>
           <p className="pl-4 text-sm text-slate-600">{theater.diaChi}</p>
-          <div className="grid grid-cols-[repeat(16,minmax(0,1fr))] gap-1 p-4">
+          <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-[repeat(16,minmax(0,1fr))] gap-1 p-4">
             {theater?.lichChieuPhim.map((item) => {
               return <MovieShowtime key={item.maLichChieu} showtime={item} />;
             })}

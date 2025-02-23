@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes } from "react-router-dom";
 import { renderRoutes } from "./routes";
+import { Suspense } from "react";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>{renderRoutes()}</Routes>
+      <Suspense fallback={<>loading....</>}>
+        <Routes>{renderRoutes()}</Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
