@@ -1,7 +1,7 @@
+import { lazy } from "react";
 import { Route } from "react-router-dom";
 import AdminTemPlate from "../pages/AdminTemplate";
 import UserTemplate from "../pages/UserTemplate";
-import HomePage from "../pages/UserTemplate/HomePage";
 import AuthPage from "../pages/AdminTemplate/AuthPage";
 import ListUserPage from "../pages/AdminTemplate/ListUserPage";
 import AddUser from "../pages/AdminTemplate/ListUserPage/AddUser";
@@ -13,6 +13,8 @@ import BookingTickets from "../pages/UserTemplate/BookingTickets";
 import SignIn from "../pages/UserTemplate/SignIn";
 import SignUp from "../pages/UserTemplate/SignUp";
 import DetailMovie from "../pages/UserTemplate/HomePage/DetailMovie";
+
+const HomePage = lazy(() => import("../pages/UserTemplate/HomePage"));
 
 const routes = [
   {
